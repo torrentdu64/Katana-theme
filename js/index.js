@@ -1,4 +1,4 @@
-
+import '../css/style.scss';
 
 class hello {
 
