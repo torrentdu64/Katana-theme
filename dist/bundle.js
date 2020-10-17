@@ -12,6 +12,6 @@
   \*********************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements:  */
-eval("alert('hello')\n\n\n//# sourceURL=webpack://katana-theme/./js/index.js?");
+eval("function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar hello = function hello(props) {\n  _classCallCheck(this, hello);\n\n  console.log('helllo');\n};\n\nnew hello();\n\n//# sourceURL=webpack://katana-theme/./js/index.js?");
 /******/ })()
 ;
