@@ -39,6 +39,15 @@ module.exports =  (env, argv) => {
             'css-loader',
             {
               loader: 'postcss-loader',
+              options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    autoprefixer()
+                  ]
+                ]
+              }
+            }
             },
             'sass-loader'
           ]
