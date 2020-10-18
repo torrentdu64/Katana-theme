@@ -1,19 +1,7 @@
-$body-color: red;
+$body-color: white;
 
 body {
   background:  $body-color;
 }
 
-h1 {
-  transform: rotate(2deg);
-}
-
-h2{
-    display: inline-block;
-    transform: scale(2.2);
-}
-
-div p {
-  display:inline-block;
-  transform: scale(2.2);
-}
+@import "modules/banner";
