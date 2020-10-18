@@ -1,4 +1,10 @@
 const autoprefixer = require('autoprefixer');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
+
 
 module.exports =  (env, argv) => {
   function isDevelopment() {
@@ -7,9 +13,29 @@ module.exports =  (env, argv) => {
   var config = {
     entry: './js/index.js',
     output: {
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      path: path.resolve(process.cwd(), 'dist')
     },
-    devtool: isDevelopment() ? 'source-map' : 'source-map',
+    optimization: {
+      minimizer: [
+          new TerserPlugin(),
+          new OptimizeCSSAssetsPlugin({
+          cssProcessorOptions: {
+            map: {
+              inline: false,
+              annotation: true
+            }
+          }
+        })
+      ]
+    },
+    plugins: [
+      new CleanWebpackPlugin(),
+      new MiniCSSExtractPlugin({
+        filename: "bundle.css"
+      })
+    ],
+    devtool: isDevelopment() ? 'cheap-module-source-map' : 'source-map',
     module: {
       rules: [
         {
@@ -35,7 +61,7 @@ module.exports =  (env, argv) => {
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            'style-loader',
+            MiniCSSExtractPlugin.loader,
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -43,7 +69,9 @@ module.exports =  (env, argv) => {
               postcssOptions: {
                 plugins: [
                   [
-                    autoprefixer()
+                    require('autoprefixer')({
+                                                'browsers': ['> 1%', 'last 2 versions']
+                                              })
                   ]
                 ]
               }

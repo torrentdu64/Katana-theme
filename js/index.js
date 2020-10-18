@@ -4,6 +4,7 @@ class hello {
 
   constructor(props) {
      console.log('helllo')
+     debugger
   }
 }
 
